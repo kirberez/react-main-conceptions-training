@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './styles/App.css';
-import PostItem from './components/PostItem';
 import PostList from './components/PostList';
+import PostForm from './components/PostForm';
 
 function App() {
   const [posts, setPosts] = useState([
@@ -11,8 +11,15 @@ function App() {
   ]);
 
 
+
+  const createNewPost = (post) => {
+    setPosts([...posts, {...post, id: Date.now()}])
+  }
+
+
   return (
     <div className="App">
+      <PostForm create={createNewPost} />
       <PostList posts={posts} title={"Posts list 1"} />
     </div>
   );
