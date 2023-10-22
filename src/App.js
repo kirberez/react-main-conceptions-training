@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function App() {
+  const [likes, setLikes] = useState(0);
+  const [value, setValue] = useState("Any comment");
+
+  function increment() {
+    setLikes(likes + 1)
+  }
+
+  function decrement() {
+    setLikes(likes - 1)
+  }
+
+
   return (
     <div className="App">
-      <h2>App is Working</h2>
+      <h2>{likes}</h2>
+      <h2>{value}</h2>
+      <input 
+        type='text'
+        value={value}
+        onChange={event => setValue(event.target.value)}
+      />
+      <button onClick={increment} >Increment</button>
+      <button onClick={decrement} >Decrement</button>
     </div>
   );
 }
