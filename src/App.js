@@ -1,29 +1,19 @@
 import React, { useState } from 'react';
+import './styles/App.css';
+import PostItem from './components/PostItem';
+import PostList from './components/PostList';
 
 function App() {
-  const [likes, setLikes] = useState(0);
-  const [value, setValue] = useState("Any comment");
-
-  function increment() {
-    setLikes(likes + 1)
-  }
-
-  function decrement() {
-    setLikes(likes - 1)
-  }
+  const [posts, setPosts] = useState([
+    { id: 1, title: "JavaScript", body: "Description" },
+    { id: 2, title: "JavaScript 2", body: "Description" },
+    { id: 3, title: "JavaScript 3", body: "Description" },
+  ]);
 
 
   return (
     <div className="App">
-      <h2>{likes}</h2>
-      <h2>{value}</h2>
-      <input 
-        type='text'
-        value={value}
-        onChange={event => setValue(event.target.value)}
-      />
-      <button onClick={increment} >Increment</button>
-      <button onClick={decrement} >Decrement</button>
+      <PostList posts={posts} title={"Posts list 1"} />
     </div>
   );
 }
