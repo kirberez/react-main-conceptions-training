@@ -3,6 +3,8 @@ import './styles/App.css';
 import PostList from './components/PostList';
 import PostForm from './components/PostForm';
 import PostFilter from './components/PostFilter';
+import MyModal from './components/UI/MyModal/MyModal';
+import MyButton from './components/UI/button/MyButton';
 
 function App() {
   const [posts, setPosts] = useState([
@@ -11,6 +13,7 @@ function App() {
     { id: 3, title: "Python", body: "sss" },
   ]);
   const [filter, setFilter] = useState({ sort: '', query: '' });
+  const [modal, setModal] = useState(false);
 
 
   const sortedPosts = useMemo(() => {
@@ -26,6 +29,7 @@ function App() {
 
   const createPost = (post) => {
     setPosts([...posts, {...post, id: Date.now()}])
+    setModal(false);
   }
 
   const deletePost = (post) => {
@@ -35,13 +39,18 @@ function App() {
 
   return (
     <div className="App">
-      <PostForm create={createPost} />
+      <MyButton style={{marginTop: 30}} onClick={() => setModal(true)} >
+        Create new..
+      </MyButton>
+      <MyModal
+        visible={modal}
+        setVisible={setModal}
+      >
+        <PostForm create={createPost} />
+      </MyModal>
       <hr style={{marginTop: "15px"}} />
       <PostFilter filter={filter} setFilter={setFilter} />
-      {sortedAndSearchedPosts.length
-        ? <PostList posts={sortedAndSearchedPosts} remove={deletePost} title={"Posts list 1"} /> 
-        : <h1 style={{ textAlign: 'center' }} >There are no posts here!</h1>
-      }
+      <PostList posts={sortedAndSearchedPosts} remove={deletePost} title={"Posts list 1"} /> 
     </div>
   );
 }
