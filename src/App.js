@@ -6,6 +6,7 @@ import PostFilter from './components/PostFilter';
 import MyModal from './components/UI/MyModal/MyModal';
 import MyButton from './components/UI/button/MyButton';
 
+
 function App() {
   const [posts, setPosts] = useState([
     { id: 1, title: "JavaScript", body: "b" },
